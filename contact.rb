@@ -1,6 +1,6 @@
 class Contact
 
-@@contacts = []
+@@contact_list = []
 @@id = 1
 
   # This method should initialize the contact's attributes
@@ -14,7 +14,10 @@ class Contact
   end
 
 
-  # => READERS -----------------------------------------
+  # => READERS -----------------------------------------------------------------
+
+
+
   def first_name
     @first_name
   end
@@ -34,7 +37,7 @@ class Contact
   def id
     @id
   end
-  #WRITERS------------------------------------------------
+  #WRITERS----------------------------------------------------------------------
   def first_name=(first_name)
     @first_name = first_name
   end
@@ -51,31 +54,72 @@ class Contact
     @note = note
   end
 
-#CLASS METHODS -------------------------------------------------
+#CLASS METHODS ----------------------------------------------------------------
 
   # This method should call the initializer,
   # store the newly created contact, and then return it
-  def self.create
-
-
+  def self.create(first_name, last_name, email, note)
+    new_contact = Contact.new(first_name, last_name, email, note)
+    @@contact_list << new_contact
+    return new_contact
   end
 
   # This method should return all of the existing contacts
   def self.all
-
+    @@contact_list
   end
 
   # This method should accept an id as an argument
   # and return the contact who has that id
-  def self.find
-
+  def self.find(id)
+    @@contact_list.each do |contact|
+      if contact.id == id
+      puts contact.first_name
+      end
+    end
   end
 
-  # This method should allow you to specify
+  def self.find_by (attribute, value)
+    if attribute == 'first_name'
+      @@contact_list.each do |contact|
+        if contact.first_name == value
+        return contact
+        end
+      end
+    end
+
+    if attribute == 'last_name'
+      @@contact_list. each do |contact|
+        if contact.last_name == value
+          retun contact
+        end
+       end
+     end
+    if attribute == 'email'
+      @@contact_list.each do |contact|
+        if contact.email == value
+          return contact
+        end
+      end
+    end
+  end
+
+
+  # This method should delete all of the contacts
+  def self.delete_all
+    @@contact_list.clear
+    puts @@contact_list
+  end
+
+
+
+  #INSTANCE METHODS -----------------------------------------------------------
+
+# This method should allow you to specify
   # 1. which of the contact's attributes you want to update
   # 2. the new value for that attribute
   # and then make the appropriate change to the contact
-  def update
+  def update(attribute, old_value, new_value)
 
   end
 
@@ -83,14 +127,6 @@ class Contact
   # but it should allow you to search for a contact using attributes other than id
   # by specifying both the name of the attribute and the value
   # eg. searching for 'first_name', 'Betty' should return the first contact named Betty
-  def self.find_by
-
-  end
-
-  # This method should delete all of the contacts
-  def self.delete_all
-
-  end
 
   def full_name
 
@@ -107,7 +143,15 @@ class Contact
 end
 
 
-me = Contact.new("Nader", "abou-ezze", "naderabouezze93@gmail.com", "met at park")
-puts me.id
-brother = Contact.new("marwan", "abou-ezze", "marwanabouezze@gmail.com", "he is my brother")
-puts brother.id
+
+
+
+me = Contact.create("Nader", "abou-ezze", "naderabouezze93@gmail.com", "met at park")
+sister = Contact.create("Rheam", "Abou-Ezze", "rheamabouezze93@gmail.com", "my older sister")
+brother = Contact.create("Marwan", "Abou-Ezze", "marwanabouezze93@gmail.com", "my older brother")
+
+# puts Contact.find(1)
+# puts Contact.find_by("first_name", "Nader")
+# puts Contact.find_by("first_name", "Rheam")
+puts Contact.all
+p Contact.delete_all
