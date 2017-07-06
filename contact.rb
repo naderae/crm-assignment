@@ -31,6 +31,9 @@ class Contact
     @note
   end
 
+  def id
+    @id
+  end
   #WRITERS------------------------------------------------
   def first_name=(first_name)
     @first_name = first_name
@@ -102,3 +105,9 @@ class Contact
   # Feel free to add other methods here, if you need them.
 
 end
+
+
+me = Contact.new("Nader", "abou-ezze", "naderabouezze93@gmail.com", "met at park")
+puts me.id
+brother = Contact.new("marwan", "abou-ezze", "marwanabouezze@gmail.com", "he is my brother")
+puts brother.id
