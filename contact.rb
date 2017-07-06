@@ -66,7 +66,7 @@ class Contact
 
   # This method should return all of the existing contacts
   def self.all
-    @@contact_list
+    puts @@contact_list
   end
 
   # This method should accept an id as an argument
@@ -119,8 +119,19 @@ class Contact
   # 1. which of the contact's attributes you want to update
   # 2. the new value for that attribute
   # and then make the appropriate change to the contact
-  def update(attribute, old_value, new_value)
-
+  def update(attribute, new_value)
+    if attribute == "first_name"
+      self.first_name= new_value
+    elsif
+       attribute == "last_name"
+      self.last_name = new_value
+    elsif
+      attribute == "email"
+      self.email= new_value
+    elsif
+      attribute == "note"
+      self.note = new_value
+    end
   end
 
   # This method should work similarly to the find method above
@@ -129,18 +140,19 @@ class Contact
   # eg. searching for 'first_name', 'Betty' should return the first contact named Betty
 
   def full_name
-
+    "#{@first_name} #{@last_name}"
   end
 
   # This method should delete the contact
   # HINT: Check the Array class docs for built-in methods that might be useful here
   def delete
-
+    @@contact_list.delete(self)
   end
 
   # Feel free to add other methods here, if you need them.
 
 end
+
 
 
 
@@ -153,5 +165,9 @@ brother = Contact.create("Marwan", "Abou-Ezze", "marwanabouezze93@gmail.com", "m
 # puts Contact.find(1)
 # puts Contact.find_by("first_name", "Nader")
 # puts Contact.find_by("first_name", "Rheam")
-puts Contact.all
-p Contact.delete_all
+# puts Contact.all
+# p Contact.delete_all
+# puts Contact.all
+Contact.all
+me.update("first_name", "Zlatan")
+Contact.all
