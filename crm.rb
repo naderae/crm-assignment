@@ -76,7 +76,7 @@ class CRM
 
 
   def display_all_contacts
-    puts "#{Contact.all}"
+    puts Contact.all
   end
 
   def search_by_attribute
