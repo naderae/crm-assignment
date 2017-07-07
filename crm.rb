@@ -76,11 +76,16 @@ class CRM
 
 
   def display_all_contacts
-
+    puts "#{Contact.all}"
   end
 
   def search_by_attribute
-
+    puts "Do you want to search for contact using first name, last name, or email?"
+    attribute = gets.chomp
+    puts "what is this contact's name (first or last) or email address?"
+    value = gets.chomp
+    contact = Contact.find_by(attribute, value)
+    puts contact.full_name
   end
 
 end
