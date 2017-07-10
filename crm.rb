@@ -33,6 +33,7 @@ class CRM
     when 4 then display_all_contacts
     when 5 then search_by_attribute
     when 6 then
+    end
   end
 
   def add_new_contact
@@ -48,7 +49,12 @@ class CRM
     print "enter notes"
     notes = gets.chomp
 
-    Contact.create(first_name, last_name, email, notes)
+    contact = Contact.create(
+    first_name: first_name,
+    last_name: last_name,
+    email: email,
+    note: notes
+    )
   end
 
 
@@ -60,8 +66,14 @@ class CRM
       old_value = gets.chomp
       print "what is the new value of that attribute?"
       new_value = gets.chomp
-      contact = Contact.find_by(attribute, old_value)
-      contact.update(attribute, new_value)
+
+      contact = Contact.find_by(
+      attribute.to_sym => old_value
+      )
+
+      contact.update(
+      attribute.to_sym => new_value
+      )
   end
 
 
@@ -70,8 +82,11 @@ class CRM
     attribute = gets.chomp
     puts "whose the contact you want to delete?"
     value = gets.chomp
-    contact = Contact.find_by(attribute, value)
+    contact = Contact.find_by(
+    attribute.to_sym => value
+    )
     contact.delete
+
   end
 
 
@@ -84,14 +99,21 @@ class CRM
     attribute = gets.chomp
     puts "what is this contact's name (first or last) or email address?"
     value = gets.chomp
-    contact = Contact.find_by(attribute, value)
+    contact = Contact.find_by(
+
+    attribute.to_sym => value
+    )
     puts contact.full_name
   end
 
 end
-end
+
 
 
 
 menu = CRM.new
 menu.main_menu
+
+at_exit do
+  ActiveRecord::Base.connection.close
+end
